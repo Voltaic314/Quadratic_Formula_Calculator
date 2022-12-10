@@ -45,8 +45,8 @@ def quad_formula(a: float, b: float, c: float):
 
     else:
 
-        x_1 = ((b*-1) - (math.sqrt((b**2) - (4*a*c)))) / (2*a)
-        x_2 = ((b*-1) + (math.sqrt((b**2) - (4*a*c)))) / (2*a)
+        x_1 = -b - discriminate / (2*a)
+        x_2 = -b + discriminate / (2*a)
 
         return x_1, x_2
 
