@@ -5,7 +5,6 @@ Date: 11/21/2022
 The purpose of this script is to ask the user for inputs of what the a, b, and c values are of the function.
 Then given those values, calculate what your function's intercepts would be given that information.
 """
-
 import math
 
 
@@ -37,25 +36,27 @@ So your input should look like '1, 8, 15'\n""")
 
 
 def quad_formula(a: float, b: float, c: float):
-    discriminate = (math.sqrt((b**2) - (4*a*c)))
+    try:
+        discriminant = b ** 2 - 4 * a * c
+        x_1 = (-b + math.sqrt(discriminant)) / (2 * a)
+        x_2 = (-b - math.sqrt(discriminant)) / (2 * a)
+        return x_1, x_2
 
-    if discriminate < 0:
+    except ValueError:
         print("Domain error, your discriminate value can't be a non-real number")
         return 0.0, 0.0
-
-    else:
-
-        x_1 = -b - discriminate / (2*a)
-        x_2 = -b + discriminate / (2*a)
-
-        return x_1, x_2
 
 
 def main():
     a, b, c = setup_variables()
     first_x, second_x = quad_formula(a, b, c)
 
-    print(f"\nYour function's intercept values are: \n{first_x} and {second_x}")
+    if first_x and second_x:
+
+        print(f"\nYour function's intercept values are: \n{first_x} and {second_x}")
+
+    else:
+        print(f" Your function has no real solutions.")
 
 
 if __name__ == '__main__':
