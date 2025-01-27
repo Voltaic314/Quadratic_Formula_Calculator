@@ -1,41 +1,39 @@
 package main
 
 import (
+	"os"
+	"bufio"
 	"fmt"
-	"strconv"
 	"math"
+	"strconv"
+	"strings"
 )
 
 func main() {
-	var a_str string
-	var b_str string
-	var c_str string
 
-	fmt.Println("Hello World!")
-	fmt.Println("Today we will be calculating the roots of X given your A, B, and C values.")
-	
-	fmt.Printf("First, give us your A value: ")
-	fmt.Scanln(&a_str)
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Printf("Give us your A, B, and C values as comma-separated values: ")
 
-	a, err := strconv.ParseFloat(a_str, 64)
-	if err != nil {
-		fmt.Println(err)
+	// Read the full input line
+	user_input, _ := reader.ReadString('\n')
+	user_input = strings.TrimSpace(user_input) // Remove extra spaces or newlines
+	fmt.Printf("Raw input: %q\n", user_input)
+
+	// Split the input into parts
+	split_str := strings.Split(user_input, ",")
+	fmt.Printf("Split result: %#v\n", split_str)
+
+	if len(split_str) != 3 {
+		fmt.Println("Please ensure you are entering 3 values.")
+		return
 	}
 
-	fmt.Printf("Next, give us your B value: ")
-	fmt.Scanln(&b_str)
-
-	b, err := strconv.ParseFloat(b_str, 64)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fmt.Printf("Finally, give us your C value: ")
-	fmt.Scanln(&c_str)
-	
-	c, err := strconv.ParseFloat(c_str, 64)
-	if err != nil {
-		fmt.Println(err)
+	a, a_err := strconv.ParseFloat(strings.TrimSpace(split_str[0]), 64)
+	b, b_err := strconv.ParseFloat(strings.TrimSpace(split_str[1]), 64)
+	c, c_err := strconv.ParseFloat(strings.TrimSpace(split_str[2]), 64)
+	if a_err != nil || b_err != nil || c_err != nil {
+		fmt.Println("Please ensure you are entering valid numbers.")
+		return
 	}
 
 	fmt.Println("Great! Now we will calculate the roots of x. Give us one moment...")
